@@ -1,0 +1,24 @@
+.App {
+  text-align: center;
+}
+
+.object-container {
+  display: flex;
+  justify-content: center;
+}
+
+.object {
+  margin: 10px;
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.square {
+  width: 20px;
+  height: 20px;
+}
+
