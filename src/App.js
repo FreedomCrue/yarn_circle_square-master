@@ -2,31 +2,41 @@ import React, { useState } from 'react';
 import './App.css';
 
 const App = () => {
-  const [selectedItems, setSelectedItems] = useState([
-    
-  ]);
+  const [selectedItems, setSelectedItems] = useState([]);
 
   const objectTemplates = [
-    { type: "circle", color: "black", size: 10, dimension: 20, backgroundColor: "black" },
-    { type: "square", color: "blue", size: 15, dimension: 5, backgroundColor: "blue" },
-    { type: "circle", color: "green", size: 8, dimension: 16, backgroundColor: "green" },
-    { type: "square", color: "purple", size: 12, dimension: 6, backgroundColor: "purple" }
+    { color: "black", backgroundColor: "black" },
+    { color: "blue", backgroundColor: "blue" },
+    { color: "green", backgroundColor: "green" },
+    { color: "purple", backgroundColor: "purple" }
   ];
 
-  const ObjectTemplate = ({ template }) => (
-    <div className={`object ${template.type}`} style={{ backgroundColor: template.backgroundColor }}></div>
+  const ObjectTemplate = ({ template, index, removeItem }) => (
+    <div style={{ backgroundColor: template.backgroundColor }}>
+      <button className="btn" onClick={() => removeItem(index)}>
+        Удалить
+      </button>
+    </div>
   );
 
   const SelectedItem = ({ item }) => (
     <div className={`object ${item.type}`} style={{ backgroundColor: item.backgroundColor, position: 'static', left: `${item.x}px`, top: `${item.y}px` }}></div>
   );
 
+  const removeSelectedItem = (index) => {
+    setSelectedItems((prevItems) => prevItems.filter((_, i) => i !== index));
+  };
+
   return (
     <div className="App">
-      <h2>Шаблоны</h2>
       <div className="object-container">
         {objectTemplates.map((template, index) => (
-          <ObjectTemplate key={index} template={template} />
+          <ObjectTemplate
+            key={index}
+            template={template}
+            index={index}
+            removeItem={removeSelectedItem}
+          />
         ))}
       </div>
 
